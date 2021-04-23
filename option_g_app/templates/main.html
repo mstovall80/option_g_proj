@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2>welcome {{this_user.first_name}} {{this_user.last_name}}</h2>
+    </div>
+    <form method= POST action="/quote_list">
+        <div class="row align-items-center">
+            <div class="row">
+                <ul>
+                    {%for quote in this_user.quote.all%}
+                    <li>{{quote.quote}}</li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </form>
+    <form method="post" action="/add_quote">
+        {% csrf_token%}
+        <div class="jumbotron">
+            <h2>add quote</h2>
+            <div>
+                <div class="mb-2">
+                    <label for="exampleFormControlInput1" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="author"
+                        placeholder="author name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">quote</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="quote"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="add_quote">
+                </div>
+            </div>
+        </div>
+    </form>
+    <a href="/delete_user"><button class="btn btn-primary" type="submit">Delete</button></a>
+    <div>
+        <a href="/logout"><input type="submit" value="logout"></a>
+    </div>
+
+
+
+</body>
+
+</html>
